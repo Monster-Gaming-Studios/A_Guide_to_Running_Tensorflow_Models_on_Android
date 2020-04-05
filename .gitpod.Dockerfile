@@ -1,8 +1,12 @@
-FROM gitpod/workspace-full:latest
-
-ENV ANDROID_HOME=/workspace/android-sdk \
-    FLUTTER_ROOT=/workspace/flutter \
-    FLUTTER_HOME=/workspace/flutter
-
-RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh \
-             && sdk install java 8.0.242.j9-adpt"
+  
+FROM gitpod/workspace-full-vnc:branch-jx-python-tk
+RUN add-apt-repository ppa:maarten-fonville/android-studio && \
+    apt-get update && \
+    apt-get install android-sdk \
+        lib32stdc++6 \
+        android-studio \
+        android-sdk-build-tools \
+        android-sdk \
+        android-sdk-platform-23 --no-install-recommends --yes \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
